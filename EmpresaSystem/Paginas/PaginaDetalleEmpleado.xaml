@@ -1,0 +1,122 @@
+﻿<Page
+    x:Class="EmpresaSystem.Paginas.PaginaDetalleEmpleado"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:local="using:EmpresaSystem.Paginas"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    mc:Ignorable="d"
+    xmlns:converters="using:EmpresaSystem.Converters"
+    Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
+
+    <Page.Resources>
+        <converters:ComboBoxItemConverter x:Key="ComboBoxItemConverter"/>
+    </Page.Resources>
+    
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="*"/>
+        </Grid.RowDefinitions>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="*"/>
+            <ColumnDefinition Width="3*"/>
+        </Grid.ColumnDefinitions>
+
+        <TextBlock Grid.Row="1"
+                   Grid.Column="0"
+                   Grid.ColumnSpan="2"
+                   Margin="5"
+                   Text="Detalle de Empleado"
+                   FontSize="48"/>
+
+        <TextBlock Grid.Row="2"
+                   Grid.Column="0"
+                   Margin="5"
+                   Text="Nombre"
+                   VerticalAlignment="Center"
+                   FontSize="24"/>
+
+        <TextBox Grid.Row="2"
+                 Grid.Column="1"
+                 x:Name="txtNombre"
+                 Text="{x:Bind Item.Nombre, Mode=TwoWay}"
+                 Width="500"
+                 Margin="10"
+                 HorizontalAlignment="Left"
+                 FontSize="24"/>
+
+        <TextBlock Grid.Row="3"
+                   Grid.Column="0"
+                   Margin="5"
+                   Text="Apellido Paterno"
+                   VerticalAlignment="Center"
+                   FontSize="24"/>
+
+        <TextBox Grid.Row="3"
+                 Grid.Column="1"
+                 x:Name="txtApellidoPaterno"
+                 Text="{x:Bind Item.ApellidoPaterno, Mode=TwoWay}"
+                 Width="500"
+                 Margin="10"
+                 HorizontalAlignment="Left"
+                 FontSize="24"/>
+
+        <TextBlock Grid.Row="4"
+                   Grid.Column="0"
+                   Margin="5"
+                   Text="Apellido Materno"
+                   VerticalAlignment="Center"
+                   FontSize="24"/>
+
+        <TextBox Grid.Row="4"
+                 Grid.Column="1"
+                 x:Name="txtApellidoMaterno"
+                 Text="{x:Bind Item.ApellidoMaterno, Mode=TwoWay}"
+                 Width="500"
+                 Margin="10"
+                 HorizontalAlignment="Left"
+                 FontSize="24"/>
+
+        <TextBlock Grid.Row="5"
+                   Grid.Column="0"
+                   Margin="5"
+                   Text="Departamento"
+                   VerticalAlignment="Center"
+                   FontSize="24"/>
+
+        <ComboBox Grid.Row="5"
+                  Grid.Column="1"
+                  x:Name="cbxDepartamento"
+                  Width="500"
+                  Margin="10"
+                  HorizontalAlignment="Left"
+                  FontSize="24"
+                  ItemsSource="{x:Bind Departamentos}"
+                  DisplayMemberPath="Nombre"
+                  SelectedValuePath="Id"
+                  SelectedItem="{x:Bind Item.FK_DepartamentoEmpleado, Mode=TwoWay, Converter={StaticResource ComboBoxItemConverter}}"/>
+
+        <CommandBar Grid.Row="0"
+                    Grid.Column="0"
+                    Grid.ColumnSpan="2"
+                    DefaultLabelPosition="Right"
+                    OverflowButtonVisibility="Collapsed">
+            <AppBarButton x:Name="btnGuardar"
+                          Icon="Save"
+                          Label="Guardar"
+                          Click="BtnGuardar_Click"/>
+
+            <AppBarButton x:Name="btnEliminar"
+                          Icon="Delete"
+                          Label="Eliminar"
+                          Visibility="Collapsed"
+                          Click="BtnEliminar_Click"/>
+        </CommandBar>
+    </Grid>
+</Page>
